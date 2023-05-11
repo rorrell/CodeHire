@@ -1,0 +1,39 @@
+﻿@model CodeHire.Dtos.JobListingDto
+@{
+    ViewBag.Title = "Job Listing Details";
+}
+
+<h2>@Model.Title</h2>
+<div class="container">
+    <div class="col-md-8">
+        <ul class="list-group">
+            <li class="list-group-item active">
+                @Model.Company
+                <span class="bg-primary badge rounded-pill">@Model.Wage</span>
+            </li>
+            <li class="list-group-item">
+                <div class="fw-bold">Location:</div>
+                @Model.Location
+            </li>
+            <li class="list-group-item">
+                <div class="fw-bold">Expiration Date:</div>
+                @if (@Model.ExpirationDate.HasValue)
+                {
+                    @Model.ExpirationDate.Value.ToShortDateString()
+                }
+                else
+                {
+                    <text>Job has no expiration date.</text>
+                }
+            </li>
+            <li class="list-group-item">
+                <div class="fw-bold">Languages:</div>
+                @string.Join(", ", Model.Languages.Select(l => l.Name))
+            </li>
+            <li class="list-group-item">
+                <div class="fw-bold">Description:</div>
+                @Model.Description
+            </li>
+        </ul>
+    </div>
+</div>

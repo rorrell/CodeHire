@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33529.622
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeHire", "CodeHire\CodeHire.csproj", "{D718EDEB-E775-4259-B432-9EB81A8CAF40}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D718EDEB-E775-4259-B432-9EB81A8CAF40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D718EDEB-E775-4259-B432-9EB81A8CAF40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D718EDEB-E775-4259-B432-9EB81A8CAF40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D718EDEB-E775-4259-B432-9EB81A8CAF40}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E31A6F1E-D0FA-4ACC-86E4-90F9A76E319B}
+	EndGlobalSection
+EndGlobal

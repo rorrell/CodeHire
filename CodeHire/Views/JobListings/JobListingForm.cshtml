@@ -1,0 +1,60 @@
+﻿@using System.Web.UI.WebControls
+@model CodeHire.ViewModels.JobListingFormViewModel
+@{
+    ViewBag.Title = "Job Listing Form";
+}
+
+<h2>Job Listing Form</h2>
+
+@using (@Html.BeginForm())
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.JobListing.Title)
+        @Html.TextBoxFor(m => m.JobListing.Title, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.JobListing.Title)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.JobListing.Company)
+        @Html.TextBoxFor(m => m.JobListing.Company, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.JobListing.Company)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.JobListing.Location)
+        @Html.TextBoxFor(m => m.JobListing.Location, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.JobListing.Location)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.JobListing.ExpirationDate)
+        @Html.TextBoxFor(m => m.JobListing.ExpirationDate, "{0:MM/dd/yyyy}", new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.JobListing.Wage)
+        @Html.TextBoxFor(m => m.JobListing.Wage, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Language</label>
+        <div class="tt-container">
+            <input type="text" id="language" name="language" value="" class="form-control" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-sm-4">
+            <ul id="languages" class="list-group"></ul>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.JobListing.Description)
+        @Html.TextAreaFor(m => m.JobListing.Description, new { @class = "form-control" })
+    </div>
+
+
+    @Html.Hidden("JobListing.Id", Model.JobListing?.Id ?? 0)
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-primary">Save</button>
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/JobListingsJobListingForm.js")
+}
