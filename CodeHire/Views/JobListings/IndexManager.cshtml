@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Job Listings";
+}
+
+<h2>Job Listings</h2>
+
+@Html.ActionLink("New Job Listing", "JobListingForm", "JobListings", null, new { @class = "btn btn-primary" })
+<br />
+<br />
+
+<table id="jobListings" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Job Title</th>
+            <th>Company</th>
+            <th>Location</th>
+            <th>Languages</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+@section scripts
+{
+    @Scripts.Render("~/scripts/pages/joblistingsindexManager.js")
+}

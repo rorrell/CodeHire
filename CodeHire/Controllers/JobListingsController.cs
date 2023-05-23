@@ -13,18 +13,30 @@ namespace CodeHire.Controllers
     public class JobListingsController : Controller
     {
         private JobListingsBusinessLogic bll;
+        private LanguagesBusinessLogic lbll;
 
         public JobListingsController()
         {
             bll = new JobListingsBusinessLogic();
+            lbll = new LanguagesBusinessLogic();
         }
 
         protected override void Dispose(bool disposing)
         {
             bll.Dispose();
+            lbll.Dispose();
         }
 
         public ViewResult Index()
+        {
+            if (Request.IsAuthenticated)
+                return View("IndexManager");
+
+            return View();
+        }
+
+        [Authorize(Roles = RoleName.CanManageJobs)]
+        public ViewResult IndexManager()
         {
             return View();
         }
@@ -44,7 +56,9 @@ namespace CodeHire.Controllers
         {
             var viewModel = new JobListingFormViewModel
             {
-                Languages = bll.GetLanguages()
+                Languages = lbll.GetLanguages().ToList(),
+                JobListing = new JobListingDto(),
+                SelectedLanguageNames = new List<string>()
             };
 
             return View(viewModel);
@@ -53,28 +67,44 @@ namespace CodeHire.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles=RoleName.CanManageJobs)]
-        public ActionResult Save(JobListingDto jobListingDto)
+        public ActionResult Save(JobListingFormViewModel jobListingForm)
         {
             if (!ModelState.IsValid)
             {
-                var viewModel = new JobListingFormViewModel
-                {
-                    JobListing = jobListingDto,
-                    Languages = bll.GetLanguages()
-                };
-
-                return View("JobListingForm", viewModel);
+                return View("JobListingForm", jobListingForm);
             }
 
-            if (jobListingDto.Id == 0)
-                bll.CreateJobListing(jobListingDto);
+            jobListingForm.JobListing.Languages =
+                lbll.GetLanguages().Where(
+                    l => jobListingForm.SelectedLanguageNames.Contains(l.Name)).ToList();
+
+            if (jobListingForm.JobListing.Id == 0)
+                bll.CreateJobListing(jobListingForm.JobListing);
             else
             {
-                if (!bll.UpdateJobListing(jobListingDto.Id, jobListingDto))
+                if (!bll.UpdateJobListing(jobListingForm.JobListing.Id, jobListingForm.JobListing))
                     return new HttpNotFoundResult();
             }
 
             return RedirectToAction("Index", "JobListings");
+        }
+
+        public ActionResult Edit(int id)
+        {
+            var jobListing = bll.GetJobListing(id);
+
+            if (jobListing == null)
+                return HttpNotFound();
+
+            var viewModel = new JobListingFormViewModel
+            {
+                JobListing = jobListing,
+                Languages = lbll.GetLanguages().ToList(),
+                SelectedLanguageNames = jobListing.Languages.Select(
+                    l => l.Name).ToList()
+            };
+
+            return View("JobListingForm", viewModel);
         }
     }
 }

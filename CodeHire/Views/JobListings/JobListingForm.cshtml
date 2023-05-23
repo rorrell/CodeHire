@@ -6,7 +6,7 @@
 
 <h2>Job Listing Form</h2>
 
-@using (@Html.BeginForm())
+@using (@Html.BeginForm("Save", "JobListings"))
 {
     <div class="form-group">
         @Html.LabelFor(m => m.JobListing.Title)
@@ -32,15 +32,8 @@
         @Html.TextBoxFor(m => m.JobListing.Wage, new { @class = "form-control" })
     </div>
     <div class="form-group">
-        <label>Language</label>
-        <div class="tt-container">
-            <input type="text" id="language" name="language" value="" class="form-control" />
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4 col-sm-4">
-            <ul id="languages" class="list-group"></ul>
-        </div>
+        @Html.LabelFor(m => m.JobListing.Languages)
+        @Html.ListBoxFor(m => m.SelectedLanguageNames, new SelectList(Model.Languages, "Name", "Name"), new { @class = "form-control" })
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.JobListing.Description)
@@ -56,5 +49,4 @@
 @section scripts
 {
     @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/Scripts/JobListingsJobListingForm.js")
 }

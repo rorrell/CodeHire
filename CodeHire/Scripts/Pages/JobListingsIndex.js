@@ -21,7 +21,7 @@
                 data: "languages",
                 render: function (data, type, full) {
                     return $.map(data, function (d, i) {
-                        return d.name
+                        return d.name;
                     }).join(', ');
                 }
             }

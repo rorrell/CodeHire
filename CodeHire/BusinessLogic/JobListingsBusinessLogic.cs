@@ -23,11 +23,6 @@ namespace CodeHire.BusinessLogic
             _context.Dispose();
         }
 
-        public IEnumerable<LanguageDto> GetLanguages()
-        {
-            return _context.Languages.Select(Mapper.Map<Language, LanguageDto>);
-        }
-
         public IEnumerable<JobListingDto> GetJobListings()
         {
             return _context.JobListings
@@ -51,6 +46,14 @@ namespace CodeHire.BusinessLogic
         public JobListingDto CreateJobListing(JobListingDto jobListingDto)
         {
             var jobListing = Mapper.Map<JobListingDto, JobListing>(jobListingDto);
+
+            jobListing.Languages.Clear();
+            var selectedIds = jobListingDto.Languages.
+                Select(l => l.Id);
+            var langs = _context.Languages.
+                Where(l => selectedIds.Contains(l.Id)).ToList();
+            jobListing.Languages.AddRange(langs);
+
             _context.JobListings.Add(jobListing);
             _context.SaveChanges();
 
@@ -61,13 +64,36 @@ namespace CodeHire.BusinessLogic
 
         public bool UpdateJobListing(int id, JobListingDto jobListingDto)
         {
-            var jobListingInDb = _context.JobListings.SingleOrDefault(j => j.Id == id);
+            var jobListingInDb = _context.JobListings
+                .Include(j => j.Languages)
+                .SingleOrDefault(j => j.Id == id);
 
             if (jobListingInDb == null)
                 return false;
 
             Mapper.Map(jobListingDto, jobListingInDb);
+            jobListingInDb.Languages.Clear();
 
+            var selectedIds = jobListingDto.Languages.
+                Select(l => l.Id);
+            var langs = _context.Languages.
+                Where(l => selectedIds.Contains(l.Id)).ToList();
+            jobListingInDb.Languages.AddRange(langs);
+
+
+            _context.SaveChanges();
+
+            return true;
+        }
+
+        public bool DeleteJobListing(int id)
+        {
+            var jobListingInDb = _context.JobListings.SingleOrDefault(j => j.Id == id);
+
+            if (jobListingInDb == null)
+                return false;
+
+            _context.JobListings.Remove(jobListingInDb);
             _context.SaveChanges();
 
             return true;

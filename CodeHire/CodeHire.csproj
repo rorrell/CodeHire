@@ -189,8 +189,10 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BusinessLogic\JobListingsBusinessLogic.cs" />
+    <Compile Include="BusinessLogic\LanguagesBusinessLogic.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\JobListingsController.cs" />
+    <Compile Include="Controllers\Api\LanguagesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JobListingsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -502,8 +504,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\Pages\JobListingsIndexManager.js" />
     <Content Include="Scripts\Pages\JobListingsIndex.js" />
-    <Content Include="Scripts\Pages\JobListingsJobListingForm.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
     <Content Include="Scripts\typeahead.bundle.js" />
@@ -547,6 +549,7 @@
     <Content Include="Views\JobListings\Index.cshtml" />
     <Content Include="Views\JobListings\Details.cshtml" />
     <Content Include="Views\JobListings\JobListingForm.cshtml" />
+    <Content Include="Views\JobListings\IndexManager.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

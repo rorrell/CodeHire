@@ -10,6 +10,7 @@ namespace CodeHire.ViewModels
     public class JobListingFormViewModel
     {
         public JobListingDto JobListing { get; set; }
-        public IEnumerable<LanguageDto> Languages { get; set; }
+        public List<string> SelectedLanguageNames { get; set; }
+        public List<LanguageDto> Languages { get; set; } = new();
     }
 }

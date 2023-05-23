@@ -41,7 +41,8 @@ namespace CodeHire.Controllers.Api
             return Ok(jobListing);
         }
 
-        [HttpPut]
+        [HttpPost]
+        [Authorize(Roles = RoleName.CanManageJobs)]
         public IHttpActionResult CreateJobListing(JobListingDto jobListingDto)
         {
             if (ModelState.IsValid)
@@ -53,12 +54,25 @@ namespace CodeHire.Controllers.Api
         }
 
         [HttpPut]
+        [Authorize(Roles = RoleName.CanManageJobs)]
         public IHttpActionResult UpdateJobListing(int id, JobListingDto jobListingDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest();
 
             var success = bll.UpdateJobListing(id, jobListingDto);
+
+            if (!success)
+                return NotFound();
+
+            return Ok();
+        }
+
+        [HttpDelete]
+        [Authorize(Roles = RoleName.CanManageJobs)]
+        public IHttpActionResult DeleteJobListing(int id)
+        {
+            var success = bll.DeleteJobListing(id);
 
             if (!success)
                 return NotFound();
