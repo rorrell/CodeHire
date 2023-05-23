@@ -74,6 +74,8 @@ namespace CodeHire.Controllers
                 return View("JobListingForm", jobListingForm);
             }
 
+            //have to get from db because jobListingForm.Languages is null at this point
+            //and the business logic layer doesn't know about JobListingFormViewModel
             jobListingForm.JobListing.Languages =
                 lbll.GetLanguages().Where(
                     l => jobListingForm.SelectedLanguageNames.Contains(l.Name)).ToList();

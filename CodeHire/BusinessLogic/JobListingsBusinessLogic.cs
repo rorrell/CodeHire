@@ -47,6 +47,8 @@ namespace CodeHire.BusinessLogic
         {
             var jobListing = Mapper.Map<JobListingDto, JobListing>(jobListingDto);
 
+            //have to do this because the languages must come from the same
+            //context to be saved properly
             jobListing.Languages.Clear();
             var selectedIds = jobListingDto.Languages.
                 Select(l => l.Id);
@@ -72,8 +74,10 @@ namespace CodeHire.BusinessLogic
                 return false;
 
             Mapper.Map(jobListingDto, jobListingInDb);
-            jobListingInDb.Languages.Clear();
 
+            //have to do this because the languages must come from the same
+            //context to be saved properly
+            jobListingInDb.Languages.Clear();
             var selectedIds = jobListingDto.Languages.
                 Select(l => l.Id);
             var langs = _context.Languages.
