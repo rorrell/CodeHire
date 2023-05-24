@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using CodeHire.BusinessLogic;
 using CodeHire.Dtos;
 using CodeHire.Models;
@@ -23,14 +24,21 @@ namespace CodeHire.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            bll.Dispose();
-            lbll.Dispose();
+            if (disposing)
+            {
+                bll.Dispose();
+                lbll.Dispose();
+            }
+            base.Dispose(disposing);
         }
 
         public ViewResult Index()
         {
-            if (Request.IsAuthenticated)
+            if (User.Identity.IsAuthenticated &&
+                User.IsInRole(RoleName.CanManageJobs))
+            {
                 return View("IndexManager");
+            }
 
             return View();
         }

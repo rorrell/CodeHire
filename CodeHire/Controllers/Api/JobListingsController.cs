@@ -23,7 +23,9 @@ namespace CodeHire.Controllers.Api
 
         protected override void Dispose(bool disposing)
         {
-            bll.Dispose();
+            if(disposing)
+                bll.Dispose();
+            base.Dispose(disposing);
         }
 
         public IHttpActionResult GetJobListings()
