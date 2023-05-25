@@ -18,7 +18,7 @@ namespace CodeHire.Controllers.Api
 
         public JobListingsController()
         {
-            bll = new JobListingsBusinessLogic();
+            bll = new JobListingsBusinessLogic(new ApplicationDbContext());
         }
 
         protected override void Dispose(bool disposing)

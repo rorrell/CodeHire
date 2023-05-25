@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using CodeHire.BusinessLogic;
 using CodeHire.Dtos;
+using CodeHire.Models;
 
 namespace CodeHire.Controllers.Api
 {
@@ -15,7 +16,7 @@ namespace CodeHire.Controllers.Api
 
         public LanguagesController()
         {
-            bll = new LanguagesBusinessLogic();
+            bll = new LanguagesBusinessLogic(new ApplicationDbContext());
         }
 
         protected override void Dispose(bool disposing)

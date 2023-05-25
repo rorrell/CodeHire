@@ -18,8 +18,9 @@ namespace CodeHire.Controllers
 
         public JobListingsController()
         {
-            bll = new JobListingsBusinessLogic();
-            lbll = new LanguagesBusinessLogic();
+            var context = new ApplicationDbContext();
+            bll = new JobListingsBusinessLogic(context);
+            lbll = new LanguagesBusinessLogic(context);
         }
 
         protected override void Dispose(bool disposing)

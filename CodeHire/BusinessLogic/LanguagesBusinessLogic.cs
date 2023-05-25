@@ -12,9 +12,9 @@ namespace CodeHire.BusinessLogic
     {
         private ApplicationDbContext _context;
 
-        public LanguagesBusinessLogic()
+        public LanguagesBusinessLogic(ApplicationDbContext context)
         {
-            _context = new ApplicationDbContext();
+            _context = context;
         }
 
         public void Dispose()

@@ -13,9 +13,9 @@ namespace CodeHire.BusinessLogic
     {
         private ApplicationDbContext _context;
 
-        public JobListingsBusinessLogic()
+        public JobListingsBusinessLogic(ApplicationDbContext context)
         {
-            _context = new ApplicationDbContext();
+            _context = context;
         }
 
         public void Dispose()
