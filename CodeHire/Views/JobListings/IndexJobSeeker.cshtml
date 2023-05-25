@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Job Listings";
+}
+
+<h2>Job Listings</h2>
+
+<table id="jobListings" class="table table-bordered table-hover">
+    <thead>
+    <tr>
+        <th>Job Title</th>
+        <th>Company</th>
+        <th>Location</th>
+        <th>Languages</th>
+        <th>Apply</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+@section scripts
+{
+    @Scripts.Render("~/scripts/pages/joblistingsindexjobseeker.js")
+}

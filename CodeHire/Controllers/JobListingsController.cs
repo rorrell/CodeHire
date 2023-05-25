@@ -39,6 +39,8 @@ namespace CodeHire.Controllers
             {
                 return View("IndexManager");
             }
+            else if (User.Identity.IsAuthenticated)
+                return View("IndexJobSeeker");
 
             return View();
         }
@@ -49,12 +51,21 @@ namespace CodeHire.Controllers
             return View();
         }
 
+        [Authorize]
+        public ViewResult IndexJobSeeker()
+        {
+            return View();
+        }
+
         public ActionResult Details(int id)
         {
             var jobListing = bll.GetJobListing(id);
 
             if (jobListing == null)
                 return HttpNotFound();
+
+            if (User.Identity.IsAuthenticated && !User.IsInRole(RoleName.CanManageJobs))
+                return View("DetailsJobSeeker", jobListing);
 
             return View(jobListing);
         }
