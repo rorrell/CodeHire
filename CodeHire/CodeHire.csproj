@@ -217,6 +217,10 @@
     <Compile Include="Migrations\202305110048407_SeedUsersAndRoles.Designer.cs">
       <DependentUpon>202305110048407_SeedUsersAndRoles.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202305271640359_AddRelationshipBetweenUsersAndJobListings.cs" />
+    <Compile Include="Migrations\202305271640359_AddRelationshipBetweenUsersAndJobListings.Designer.cs">
+      <DependentUpon>202305271640359_AddRelationshipBetweenUsersAndJobListings.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -574,6 +578,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202305110048407_SeedUsersAndRoles.resx">
       <DependentUpon>202305110048407_SeedUsersAndRoles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305271640359_AddRelationshipBetweenUsersAndJobListings.resx">
+      <DependentUpon>202305271640359_AddRelationshipBetweenUsersAndJobListings.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

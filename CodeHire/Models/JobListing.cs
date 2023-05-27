@@ -30,5 +30,7 @@ namespace CodeHire.Models
         public string Wage { get; set; }
 
         public List<Language> Languages { get; } = new();
+
+        public List<ApplicationUser> ApplicationUsers { get; } = new();
     }
 }
