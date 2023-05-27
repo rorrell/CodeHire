@@ -33,7 +33,7 @@
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.JobListing.Languages)
-        @Html.ListBoxFor(m => m.SelectedLanguageNames, new SelectList(Model.Languages, "Name", "Name"), new { @class = "form-control" })
+        @Html.ListBoxFor(m => m.SelectedLanguageIds, new SelectList(Model.Languages, "Id", "Name"), new { @class = "form-control" })
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.JobListing.Description)

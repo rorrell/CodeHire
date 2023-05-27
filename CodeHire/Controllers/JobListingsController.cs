@@ -78,7 +78,7 @@ namespace CodeHire.Controllers
             {
                 Languages = lbll.GetLanguages().ToList(),
                 JobListing = new JobListingDto(),
-                SelectedLanguageNames = new List<string>()
+                SelectedLanguageIds = new List<byte>()
             };
 
             return View(viewModel);
@@ -94,17 +94,11 @@ namespace CodeHire.Controllers
                 return View("JobListingForm", jobListingForm);
             }
 
-            //have to get from db because jobListingForm.Languages is null at this point
-            //and the business logic layer doesn't know about JobListingFormViewModel
-            jobListingForm.JobListing.Languages =
-                lbll.GetLanguages().Where(
-                    l => jobListingForm.SelectedLanguageNames.Contains(l.Name)).ToList();
-
             if (jobListingForm.JobListing.Id == 0)
-                bll.CreateJobListing(jobListingForm.JobListing);
+                bll.CreateJobListing(jobListingForm.JobListing, jobListingForm.SelectedLanguageIds);
             else
             {
-                if (!bll.UpdateJobListing(jobListingForm.JobListing.Id, jobListingForm.JobListing))
+                if (!bll.UpdateJobListing(jobListingForm.JobListing.Id, jobListingForm.JobListing, jobListingForm.SelectedLanguageIds))
                     return new HttpNotFoundResult();
             }
 
@@ -122,8 +116,8 @@ namespace CodeHire.Controllers
             {
                 JobListing = jobListing,
                 Languages = lbll.GetLanguages().ToList(),
-                SelectedLanguageNames = jobListing.Languages.Select(
-                    l => l.Name).ToList()
+                SelectedLanguageIds = jobListing.Languages.Select(
+                    l => l.Id).ToList()
             };
 
             return View("JobListingForm", viewModel);

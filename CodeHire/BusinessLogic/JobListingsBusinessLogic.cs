@@ -43,18 +43,19 @@ namespace CodeHire.BusinessLogic
             return Mapper.Map<JobListing, JobListingDto>(jobListing);
         }
 
-        public JobListingDto CreateJobListing(JobListingDto jobListingDto)
+        //The selectedLanguageIds is to support the case where we are coming from the form and so the
+        //languages are there rather than attached to the job listing Dto
+        public JobListingDto CreateJobListing(JobListingDto jobListingDto, List<byte> selectedLanguageIds = null)
         {
             var jobListing = Mapper.Map<JobListingDto, JobListing>(jobListingDto);
 
-            //have to do this because the languages must come from the same
-            //context to be saved properly
-            jobListing.Languages.Clear();
-            var selectedIds = jobListingDto.Languages.
-                Select(l => l.Id);
-            var langs = _context.Languages.
-                Where(l => selectedIds.Contains(l.Id)).ToList();
-            jobListing.Languages.AddRange(langs);
+            if (selectedLanguageIds != null)
+            {
+                jobListing.Languages.Clear();
+                var langs = _context.Languages.
+                    Where(l => selectedLanguageIds.Contains(l.Id)).ToList();
+                jobListing.Languages.AddRange(langs);
+            }
 
             _context.JobListings.Add(jobListing);
             _context.SaveChanges();
@@ -64,7 +65,9 @@ namespace CodeHire.BusinessLogic
             return jobListingDto;
         }
 
-        public bool UpdateJobListing(int id, JobListingDto jobListingDto)
+        //The selectedLanguageIds is to support the case where we are coming from the form and so the
+        //languages are there rather than attached to the job listing Dto
+        public bool UpdateJobListing(int id, JobListingDto jobListingDto, List<byte> selectedLanguageIds = null)
         {
             var jobListingInDb = _context.JobListings
                 .Include(j => j.Languages)
@@ -75,15 +78,13 @@ namespace CodeHire.BusinessLogic
 
             Mapper.Map(jobListingDto, jobListingInDb);
 
-            //have to do this because the languages must come from the same
-            //context to be saved properly
-            jobListingInDb.Languages.Clear();
-            var selectedIds = jobListingDto.Languages.
-                Select(l => l.Id);
-            var langs = _context.Languages.
-                Where(l => selectedIds.Contains(l.Id)).ToList();
-            jobListingInDb.Languages.AddRange(langs);
-
+            if (selectedLanguageIds != null)
+            {
+                jobListingInDb.Languages.Clear();
+                var langs = _context.Languages.
+                    Where(l => selectedLanguageIds.Contains(l.Id)).ToList();
+                jobListingInDb.Languages.AddRange(langs);
+            }
 
             _context.SaveChanges();
 
