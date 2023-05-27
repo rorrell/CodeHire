@@ -9,6 +9,7 @@ using System.Data.Entity;
 using AutoMapper;
 using CodeHire.BusinessLogic;
 using CodeHire.Dtos;
+using Microsoft.AspNet.Identity;
 
 namespace CodeHire.Controllers.Api
 {
@@ -41,6 +42,15 @@ namespace CodeHire.Controllers.Api
                 NotFound();
 
             return Ok(jobListing);
+        }
+        
+        [Route("api/appliedjobs")]
+        public IHttpActionResult GetAppliedJobs()
+        {
+            if(User.Identity.IsAuthenticated)
+                return Ok(bll.GetAppliedJobs(User.Identity.GetUserId()));
+
+            return Unauthorized();
         }
 
         [HttpPost]

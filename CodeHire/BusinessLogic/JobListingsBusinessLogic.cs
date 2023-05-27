@@ -71,6 +71,7 @@ namespace CodeHire.BusinessLogic
         {
             var jobListingInDb = _context.JobListings
                 .Include(j => j.Languages)
+                .Include(j => j.ApplicationUsers)
                 .SingleOrDefault(j => j.Id == id);
 
             if (jobListingInDb == null)
@@ -102,6 +103,43 @@ namespace CodeHire.BusinessLogic
             _context.SaveChanges();
 
             return true;
+        }
+
+        public bool ApplyForJob(int jobId, string userId)
+        {
+            var jobListingInDb = _context.JobListings.
+                Include(j => j.Languages).
+                Include(j => j.ApplicationUsers).
+                SingleOrDefault(j => j.Id == jobId);
+
+            if (jobListingInDb == null)
+                return false;
+
+            var userInDb = _context.Users.SingleOrDefault(u => u.Id == userId);
+
+            if (userInDb == null)
+                return false;
+
+            jobListingInDb.ApplicationUsers.Add(userInDb);
+
+            _context.SaveChanges();
+
+            return true;
+        }
+
+        public IEnumerable<JobListingDto> GetAppliedJobs(string userId)
+        {
+            var userInDb = _context.Users
+                .Include(u => u.JobListings.Select(j => j.Languages))
+                .SingleOrDefault(u => u.Id == userId);
+
+            if (userInDb == null)
+                return null;
+
+            var results = userInDb.JobListings.ToList()
+                .Select(Mapper.Map<JobListing, JobListingDto>);
+
+            return results;
         }
     }
 }

@@ -1,7 +1,9 @@
-﻿$(document).ready(function () {
+﻿
+
+$(document).ready(function () {
     var table = $("#jobListings").DataTable({
         ajax: {
-            url: "/api/joblistings",
+            url: "/api/appliedjobs",
             dataSrc: ""
         },
         columns: [
@@ -24,14 +26,7 @@
                         return d.name;
                     }).join(', ');
                 }
-            },
-            {
-                data: "id",
-                render: function (data) {
-                    return "<a href='/JobListings/Apply/" + data + "' class='btn btn-primary'>Apply</a>";
-                }
             }
         ]
     });
-
 });

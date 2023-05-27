@@ -8,6 +8,7 @@ using CodeHire.BusinessLogic;
 using CodeHire.Dtos;
 using CodeHire.Models;
 using CodeHire.ViewModels;
+using Microsoft.AspNet.Identity;
 
 namespace CodeHire.Controllers
 {
@@ -121,6 +122,25 @@ namespace CodeHire.Controllers
             };
 
             return View("JobListingForm", viewModel);
+        }
+
+        [Authorize]
+        public ActionResult Apply(int id)
+        {
+            var result = bll.ApplyForJob(id, User.Identity.GetUserId());
+
+            if (!result)
+                return HttpNotFound();
+
+            return RedirectToAction("AppliedJobs");
+        }
+
+        [Authorize]
+        public ActionResult AppliedJobs()
+        {
+            var jobs = bll.GetAppliedJobs(User.Identity.GetUserId());
+
+            return View(jobs);
         }
     }
 }

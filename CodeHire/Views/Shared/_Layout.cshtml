@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using CodeHire.Models
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -21,7 +22,10 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    @*<li>@Html.ActionLink("Home", "Index", "JobListings")</li>*@
+                    @if (User.Identity.IsAuthenticated && !User.IsInRole(RoleName.CanManageJobs))
+                    {
+                        <li>@Html.ActionLink("Applied Jobs", "AppliedJobs", "JobListings")</li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
