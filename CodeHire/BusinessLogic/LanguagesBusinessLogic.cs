@@ -8,21 +8,16 @@ using CodeHire.Models;
 
 namespace CodeHire.BusinessLogic
 {
-    public class LanguagesBusinessLogic : IDisposable
+    public class LanguagesBusinessLogic : BasicBusinessLogicImplementor<LanguageDto>
     {
-        private ApplicationDbContext _context;
+        public LanguagesBusinessLogic(ApplicationDbContext context) : base(context) {}
 
-        public LanguagesBusinessLogic(ApplicationDbContext context)
+        public override IEnumerable<LanguageDto> GetAll()
         {
-            _context = context;
+            return GetAll(null);
         }
 
-        public void Dispose()
-        {
-            _context.Dispose();
-        }
-
-        public IEnumerable<LanguageDto> GetLanguages(string query = null)
+        public IEnumerable<LanguageDto> GetAll(string query)
         {
             var languagesQuery = _context.Languages.AsQueryable();
 

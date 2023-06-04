@@ -28,7 +28,7 @@ namespace CodeHire.Controllers.Api
 
         public IHttpActionResult GetLanguages(string query = null)
         {
-            return Ok(bll.GetLanguages(query));
+            return Ok(bll.GetAll(query));
         }
     }
 }

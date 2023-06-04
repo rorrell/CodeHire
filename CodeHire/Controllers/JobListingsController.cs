@@ -61,7 +61,7 @@ namespace CodeHire.Controllers
 
         public ActionResult Details(int id)
         {
-            var jobListing = bll.GetJobListing(id);
+            var jobListing = bll.GetOne(id);
 
             if (jobListing == null)
                 return HttpNotFound();
@@ -77,7 +77,7 @@ namespace CodeHire.Controllers
         {
             var viewModel = new JobListingFormViewModel
             {
-                Languages = lbll.GetLanguages().ToList(),
+                Languages = lbll.GetAll(null).ToList(),
                 JobListing = new JobListingDto(),
                 SelectedLanguageIds = new List<byte>()
             };
@@ -96,10 +96,10 @@ namespace CodeHire.Controllers
             }
 
             if (jobListingForm.JobListing.Id == 0)
-                bll.CreateJobListing(jobListingForm.JobListing, jobListingForm.SelectedLanguageIds);
+                bll.Create(jobListingForm.JobListing, jobListingForm.SelectedLanguageIds);
             else
             {
-                if (!bll.UpdateJobListing(jobListingForm.JobListing.Id, jobListingForm.JobListing, jobListingForm.SelectedLanguageIds))
+                if (!bll.Update(jobListingForm.JobListing.Id, jobListingForm.JobListing, jobListingForm.SelectedLanguageIds))
                     return new HttpNotFoundResult();
             }
 
@@ -108,7 +108,7 @@ namespace CodeHire.Controllers
 
         public ActionResult Edit(int id)
         {
-            var jobListing = bll.GetJobListing(id);
+            var jobListing = bll.GetOne(id);
 
             if (jobListing == null)
                 return HttpNotFound();
@@ -116,7 +116,7 @@ namespace CodeHire.Controllers
             var viewModel = new JobListingFormViewModel
             {
                 JobListing = jobListing,
-                Languages = lbll.GetLanguages().ToList(),
+                Languages = lbll.GetAll(null).ToList(),
                 SelectedLanguageIds = jobListing.Languages.Select(
                     l => l.Id).ToList()
             };

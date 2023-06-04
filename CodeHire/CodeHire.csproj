@@ -188,6 +188,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="BusinessLogic\FullBusinessLogicImplementor.cs" />
+    <Compile Include="BusinessLogic\BasicBusinessLogicImplementor.cs" />
     <Compile Include="BusinessLogic\JobListingsBusinessLogic.cs" />
     <Compile Include="BusinessLogic\LanguagesBusinessLogic.cs" />
     <Compile Include="Controllers\AccountController.cs" />

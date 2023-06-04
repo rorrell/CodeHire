@@ -9,21 +9,11 @@ using System.Data.Entity;
 
 namespace CodeHire.BusinessLogic
 {
-    public class JobListingsBusinessLogic : IDisposable
+    public class JobListingsBusinessLogic : FullBusinessLogicImplementor<JobListingDto>
     {
-        private ApplicationDbContext _context;
+        public JobListingsBusinessLogic(ApplicationDbContext context) : base(context) {}
 
-        public JobListingsBusinessLogic(ApplicationDbContext context)
-        {
-            _context = context;
-        }
-
-        public void Dispose()
-        {
-            _context.Dispose();
-        }
-
-        public IEnumerable<JobListingDto> GetJobListings()
+        public override IEnumerable<JobListingDto> GetAll()
         {
             return _context.JobListings
                 .Include(j => j.Languages)
@@ -31,7 +21,7 @@ namespace CodeHire.BusinessLogic
                 .Select(Mapper.Map<JobListing, JobListingDto>);
         }
 
-        public JobListingDto GetJobListing(int id)
+        public override JobListingDto GetOne(int id)
         {
             var jobListing = _context.JobListings
                 .Include(j => j.Languages)
@@ -45,7 +35,7 @@ namespace CodeHire.BusinessLogic
 
         //The selectedLanguageIds is to support the case where we are coming from the form and so the
         //languages are there rather than attached to the job listing Dto
-        public JobListingDto CreateJobListing(JobListingDto jobListingDto, List<byte> selectedLanguageIds = null)
+        public JobListingDto Create(JobListingDto jobListingDto, List<byte> selectedLanguageIds = null)
         {
             var jobListing = Mapper.Map<JobListingDto, JobListing>(jobListingDto);
 
@@ -67,7 +57,7 @@ namespace CodeHire.BusinessLogic
 
         //The selectedLanguageIds is to support the case where we are coming from the form and so the
         //languages are there rather than attached to the job listing Dto
-        public bool UpdateJobListing(int id, JobListingDto jobListingDto, List<byte> selectedLanguageIds = null)
+        public bool Update(int id, JobListingDto jobListingDto, List<byte> selectedLanguageIds = null)
         {
             var jobListingInDb = _context.JobListings
                 .Include(j => j.Languages)
@@ -92,7 +82,7 @@ namespace CodeHire.BusinessLogic
             return true;
         }
 
-        public bool DeleteJobListing(int id)
+        public override bool Delete(int id)
         {
             var jobListingInDb = _context.JobListings.SingleOrDefault(j => j.Id == id);
 

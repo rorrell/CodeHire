@@ -31,12 +31,12 @@ namespace CodeHire.Controllers.Api
 
         public IHttpActionResult GetJobListings()
         {
-            return Ok(bll.GetJobListings());
+            return Ok(bll.GetAll());
         }
 
         public IHttpActionResult GetJobListing(int id)
         {
-            var jobListing = bll.GetJobListing(id);
+            var jobListing = bll.GetOne(id);
 
             if (jobListing == null)
                 NotFound();
@@ -60,7 +60,7 @@ namespace CodeHire.Controllers.Api
             if (ModelState.IsValid)
                 return BadRequest();
 
-            var createdJobListing = bll.CreateJobListing(jobListingDto);
+            var createdJobListing = bll.Create(jobListingDto);
 
             return Created(new Uri(Request.RequestUri + "/" + createdJobListing.Id), createdJobListing);
         }
@@ -72,7 +72,7 @@ namespace CodeHire.Controllers.Api
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            var success = bll.UpdateJobListing(id, jobListingDto);
+            var success = bll.Update(id, jobListingDto);
 
             if (!success)
                 return NotFound();
@@ -84,7 +84,7 @@ namespace CodeHire.Controllers.Api
         [Authorize(Roles = RoleName.CanManageJobs)]
         public IHttpActionResult DeleteJobListing(int id)
         {
-            var success = bll.DeleteJobListing(id);
+            var success = bll.Delete(id);
 
             if (!success)
                 return NotFound();
