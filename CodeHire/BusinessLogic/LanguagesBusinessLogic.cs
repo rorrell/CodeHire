@@ -12,12 +12,7 @@ namespace CodeHire.BusinessLogic
     {
         public LanguagesBusinessLogic(ApplicationDbContext context) : base(context) {}
 
-        public override IEnumerable<LanguageDto> GetAll()
-        {
-            return GetAll(null);
-        }
-
-        public IEnumerable<LanguageDto> GetAll(string query)
+        public IEnumerable<LanguageDto> GetAll(string query = null)
         {
             var languagesQuery = _context.Languages.AsQueryable();
 

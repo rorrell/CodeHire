@@ -12,6 +12,8 @@ namespace CodeHire.Models
     {
         public List<JobListing> JobListings { get; } = new();
 
+        public Resume? Resume { get; set; }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -25,6 +27,8 @@ namespace CodeHire.Models
     {
         public DbSet<JobListing> JobListings { get; set; }
         public DbSet<Language> Languages { get; set; }
+
+        public DbSet<Resume> Resumes { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

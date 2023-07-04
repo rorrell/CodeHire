@@ -15,6 +15,8 @@ namespace CodeHire.BusinessLogic
             _context = context;
         }
 
+        public abstract IEnumerable<T> GetAll();
+
         public abstract T GetOne(int id);
 
         //had to create special signatures with create and update in JobListings

@@ -1,0 +1,24 @@
+﻿@using System.Web.UI.WebControls
+@model CodeHire.Dtos.ResumeDto
+@{
+    ViewBag.Title = "Resume Form";
+}
+
+<h2>Resume Form</h2>
+@using (@Html.BeginForm("Save", "Resume"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Summary)
+        @Html.TextBoxFor(m => m.Summary, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Summary)
+    </div>
+
+    @Html.Hidden("Id", Model?.Id ?? 0)
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-primary">Save</button>
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}

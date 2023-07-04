@@ -21,7 +21,5 @@ namespace CodeHire.BusinessLogic
         {
             _context.Dispose();
         }
-
-        public abstract IEnumerable<T> GetAll();
     }
 }

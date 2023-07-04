@@ -12,6 +12,12 @@ $(document).ready(function () {
                 render: function (data) {
                     return "<a href='mailto:" + data + "'>" + data + "</a>";
                 }
+            },
+            {
+                data: "id",
+                render: function (data) {
+                    return "<a href='/Resume/Details/" + data + "'>View Resume</a>";
+                }
             }
         ]
     });
