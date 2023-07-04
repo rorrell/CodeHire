@@ -132,15 +132,20 @@ namespace CodeHire.Controllers
             if (!result)
                 return HttpNotFound();
 
-            return RedirectToAction("AppliedJobs");
+            return RedirectToAction("AppliedUserJobs");
         }
 
         [Authorize]
-        public ActionResult AppliedJobs()
+        public ViewResult AppliedUserJobs()
         {
-            var jobs = bll.GetAppliedJobs(User.Identity.GetUserId());
+            return View();
+        }
 
-            return View(jobs);
+        [Authorize(Roles = RoleName.CanManageJobs)]
+        public ActionResult AppliedJobs(int id)
+        {
+            var job = bll.GetOne(id);
+            return View(job);
         }
     }
 }

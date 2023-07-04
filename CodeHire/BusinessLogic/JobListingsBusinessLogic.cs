@@ -126,10 +126,18 @@ namespace CodeHire.BusinessLogic
             if (userInDb == null)
                 return null;
 
-            var results = userInDb.JobListings.ToList()
+            return userInDb.JobListings.ToList()
                 .Select(Mapper.Map<JobListing, JobListingDto>);
+        }
 
-            return results;
+        public IEnumerable<UserDto> GetUserApplicationsForJob(int jobId)
+        {
+            var jobListing = _context.JobListings
+                .Include(j => j.ApplicationUsers)
+                .First(j => j.Id == jobId);
+
+            return jobListing.ApplicationUsers
+                .Select(Mapper.Map<ApplicationUser, UserDto>);
         }
     }
 }

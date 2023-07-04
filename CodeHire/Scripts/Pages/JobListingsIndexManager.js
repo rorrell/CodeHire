@@ -27,6 +27,12 @@
             },
             {
                 data: "id",
+                render: function (data) {
+                    return "<a href='/JobListings/AppliedJobs/" + data + "' class='btn btn-primary'>View Applications</a>";
+                }
+            },
+            {
+                data: "id",
                 render: function(data) {
                     return "<button data-joblisting-id=" + data + " class='btn-link js-delete'>Delete</button>";
                 }

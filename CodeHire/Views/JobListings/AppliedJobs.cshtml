@@ -1,17 +1,39 @@
-﻿
+﻿@model CodeHire.Dtos.JobListingDto
 @{
     ViewBag.Title = "AppliedJobs";
 }
 
-<h2>Applied Jobs</h2>
+<h2>Users Who Have Applied for This Job</h2>
+
+<div class="panel panel-default" style="width:60%">
+    <div class="panel-heading">
+        <strong class="panel-title">@Model.Title</strong>
+    </div>
+    <div class="alert alert-info" role="alert"><strong>@Model.Company</strong> <span class="badge">@Model.Wage</span></div>
+    <ul class="list-group">
+        <li class="list-group-item"><strong>Based in: </strong>@Model.Location</li>
+        <li class="list-group-item"><strong>Expires:</strong>
+            @if (@Model.ExpirationDate.HasValue)
+            {
+                @Model.ExpirationDate.Value.ToShortDateString()
+            }
+            else
+            {
+                <text>Job has no expiration date.</text>
+            }
+        </li>
+        <li class="list-group-item"><strong>Languages: </strong>@string.Join(", ", Model.Languages.Select(l => l.Name))</li>
+    </ul>
+    <div class="panel-body">
+        <strong>Description:</strong>
+        @Model.Description
+    </div>
+</div>
 
 <table id="jobListings" class="table table-bordered table-hover">
     <thead>
         <tr>
-            <th>Job Title</th>
-            <th>Company</th>
-            <th>Location</th>
-            <th>Languages</th>
+            <th>User Email</th>
         </tr>
     </thead>
     <tbody>
