@@ -44,8 +44,8 @@ namespace CodeHire.Controllers.Api
             return Ok(jobListing);
         }
 
-        [Route("api/appliedjobs/{id}")]
-        public IHttpActionResult GetAppliedJobs(int id)
+        [Route("api/appliedusersbyjob/{id}")]
+        public IHttpActionResult GetAppliedUsers(int id)
         {
             if(User.Identity.IsAuthenticated && User.IsInRole(RoleName.CanManageJobs))
                 return Ok(bll.GetUserApplicationsForJob(id));

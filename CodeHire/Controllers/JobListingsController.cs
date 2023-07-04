@@ -142,7 +142,7 @@ namespace CodeHire.Controllers
         }
 
         [Authorize(Roles = RoleName.CanManageJobs)]
-        public ActionResult AppliedJobs(int id)
+        public ViewResult AppliedUsers(int id)
         {
             var job = bll.GetOne(id);
             return View(job);

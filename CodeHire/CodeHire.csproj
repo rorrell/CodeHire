@@ -512,7 +512,7 @@
     <Content Include="Scripts\Dependencies\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\Dependencies\modernizr-2.8.3.js" />
     <Content Include="Scripts\Pages\AppliedUserJobs.js" />
-    <Content Include="Scripts\Pages\AppliedJobs.js" />
+    <Content Include="Scripts\Pages\AppliedUsers.js" />
     <Content Include="Scripts\Pages\JobListingsIndexJobSeeker.js" />
     <Content Include="Scripts\Pages\JobListingsIndexManager.js" />
     <Content Include="Scripts\Pages\JobListingsIndex.js" />
@@ -562,7 +562,7 @@
     <Content Include="Views\JobListings\IndexManager.cshtml" />
     <Content Include="Views\JobListings\IndexJobSeeker.cshtml" />
     <Content Include="Views\JobListings\DetailsJobSeeker.cshtml" />
-    <Content Include="Views\JobListings\AppliedJobs.cshtml" />
+    <Content Include="Views\JobListings\AppliedUsers.cshtml" />
     <Content Include="Views\JobListings\AppliedUserJobs.cshtml" />
   </ItemGroup>
   <ItemGroup>

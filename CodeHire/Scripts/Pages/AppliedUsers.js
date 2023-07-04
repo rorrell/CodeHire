@@ -3,7 +3,7 @@
 $(document).ready(function () {
     var table = $("#jobListings").DataTable({
         ajax: {
-            url: "/api/appliedjobs/" + window.location.href.split('/').pop(),
+            url: "/api/appliedusersbyjob/" + window.location.href.split('/').pop(),
             dataSrc: ""
         },
         columns: [

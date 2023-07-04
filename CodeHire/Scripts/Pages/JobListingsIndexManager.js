@@ -28,7 +28,7 @@
             {
                 data: "id",
                 render: function (data) {
-                    return "<a href='/JobListings/AppliedJobs/" + data + "' class='btn btn-primary'>View Applications</a>";
+                    return "<a href='/JobListings/AppliedUsers/" + data + "' class='btn btn-primary'>View Applications</a>";
                 }
             },
             {
