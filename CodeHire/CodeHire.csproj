@@ -526,6 +526,7 @@
     <Content Include="Scripts\Dependencies\modernizr-2.8.3.js" />
     <Content Include="Scripts\Pages\AppliedUserJobs.js" />
     <Content Include="Scripts\Pages\AppliedUsers.js" />
+    <Content Include="Scripts\Pages\ResumeForm.js" />
     <Content Include="Scripts\Pages\JobListingsIndexJobSeeker.js" />
     <Content Include="Scripts\Pages\JobListingsIndexManager.js" />
     <Content Include="Scripts\Pages\JobListingsIndex.js" />

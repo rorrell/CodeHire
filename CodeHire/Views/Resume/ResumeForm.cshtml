@@ -5,6 +5,7 @@
 }
 
 <h2>Resume Form</h2>
+
 @using (@Html.BeginForm("Save", "Resume"))
 {
     <div class="form-group">
@@ -17,8 +18,31 @@
     @Html.AntiForgeryToken()
     <button type="submit" class="btn btn-primary">Save</button>
 }
+<br />
+@Html.ActionLink("Add Work History", "", "Resume", null, new { @class = "btn btn-primary" })
+
+@if (Model != null && Model.Id > 0 && Model.WorkHistory.Count > 0)
+{
+    <table id="workHistory" class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Job Title</th>
+                <th>Company</th>
+                <th>Location</th>
+                <th>Date To</th>
+                <th>Date Range</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+}
 
 @section scripts
 {
     @Scripts.Render("~/bundles/jqueryval")
+    @if(Model != null && Model.Id > 0 && Model.WorkHistory.Count > 0)
+    {
+        @Scripts.Render("~/scripts/pages/ResumeForm.js")
+    }
 }

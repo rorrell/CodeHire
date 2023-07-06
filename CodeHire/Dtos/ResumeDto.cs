@@ -13,6 +13,7 @@ namespace CodeHire.Dtos
         [Required]
         public UserDto User { get; set; } = null!;
 
+        [Required]
         public string Summary { get; set; }
 
         public List<JobHistoryDto> WorkHistory { get; } = new();

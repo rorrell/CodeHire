@@ -29,7 +29,9 @@ namespace CodeHire.Controllers
 
         public ActionResult ResumeForm()
         {
-            return View(new Resume());
+            var resume = bll.GetByUser(User.Identity.GetUserId());
+
+            return View(resume);
         }
 
 
@@ -38,11 +40,13 @@ namespace CodeHire.Controllers
         [Authorize]
         public ActionResult Save(ResumeDto resume)
         {
-            if (!ModelState.IsValid)
+            if (string.IsNullOrEmpty(resume.Summary))
                 return View("ResumeForm", resume);
 
-            if(resume.Id == 0)
-                bll.Create(resume);
+            if (resume.Id == 0)
+            {
+                bll.Create(resume, User.Identity.GetUserId());
+            }
             else
             {
                 if (!bll.Update(resume.Id, resume))

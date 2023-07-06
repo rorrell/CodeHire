@@ -18,6 +18,8 @@ namespace CodeHire.App_Start
 			Mapper.CreateMap<LanguageDto, Language>();
 			Mapper.CreateMap<ApplicationUser, UserDto>();
 			Mapper.CreateMap<UserDto, ApplicationUser>();
+			Mapper.CreateMap<ResumeDto, Resume>();
+			Mapper.CreateMap<Resume, ResumeDto>();
 		}
 	}
 }
