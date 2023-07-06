@@ -3,5 +3,33 @@
     ViewBag.Title = "Resume";
 }
 
-<h2>Details</h2>
+<h2>Resume for @Model.User.UserName</h2>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        @Model.User.UserName
+    </div>
+    <div class="panel-body">
+        @Model.Summary
+    </div>
+    <table class="table">
+        <thead>
+        <th>Job Title</th>
+        <th>Company</th>
+        <th>Location</th>
+        <th>Duration</th>
+        <th>Description</th>
+        </thead>
+        <tbody>
+            @foreach (var job in @Model.WorkHistory)
+            {
+                <td>@job.JobTitle</td>
+                <td>@job.Company</td>
+                <td>@job.Location</td>
+                <td>@job.StartDateString - @job.EndDateString</td>
+                <td>@job.Description</td>
+            }
+        </tbody>
+    </table>
+</div>
 

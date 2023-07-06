@@ -20,6 +20,8 @@ namespace CodeHire.App_Start
 			Mapper.CreateMap<UserDto, ApplicationUser>();
 			Mapper.CreateMap<ResumeDto, Resume>();
 			Mapper.CreateMap<Resume, ResumeDto>();
+			Mapper.CreateMap<JobHistoryDto, JobHistory>();
+			Mapper.CreateMap<JobHistory, JobHistoryDto>();
 		}
 	}
 }

@@ -30,6 +30,8 @@ namespace CodeHire.Models
 
         public DbSet<Resume> Resumes { get; set; }
 
+        public DbSet<JobHistory> JobHistories { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

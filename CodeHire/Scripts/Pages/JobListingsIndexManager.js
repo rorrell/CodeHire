@@ -44,17 +44,12 @@
         ".js-delete",
         function() {
             var button = $(this);
-            bootbox.confirm("Are you sure you want to delete this customer?",
-                function(result) {
-                    if (result) {
-                        $.ajax({
-                            url: "api/joblistings/" + button.attr("data-joblisting-id"),
-                            method: "DELETE",
-                            success: function() {
-                                table.row(button.parents("tr")).remove().draw();
-                            }
-                        });
-                    }
-                });
+            $.ajax({
+                url: "/api/joblistings/" + button.attr("data-joblisting-id"),
+                method: "DELETE",
+                success: function() {
+                    table.row(button.parents("tr")).remove().draw();
+                }
+            });
         });
 });

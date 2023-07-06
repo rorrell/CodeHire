@@ -34,6 +34,15 @@ namespace CodeHire.Controllers
             return View(resume);
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                bll.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]

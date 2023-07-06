@@ -1,0 +1,50 @@
+﻿@using System.Web.UI.WebControls
+@model CodeHire.Dtos.JobHistoryDto
+@{
+    ViewBag.Title = "Job History Form";
+}
+
+<h2>Job History Form</h2>
+
+@using (@Html.BeginForm("Save", "JobHistories"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.JobTitle)
+        @Html.TextBoxFor(m => m.JobTitle, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.JobTitle)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Company)
+        @Html.TextBoxFor(m => m.Company, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Company)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Location)
+        @Html.TextBoxFor(m => m.Location, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Location)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.StartDate)
+        @Html.TextBoxFor(m => m.StartDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+        @Html.ValidationMessageFor(m => m.StartDate)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.EndDate)
+        @Html.TextBoxFor(m => m.EndDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+        @Html.ValidationMessageFor(m => m.EndDate)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Description)
+        @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Description)
+    </div>
+
+    @Html.Hidden("Id", Model?.Id ?? 0)
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-primary">Save</button>
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}

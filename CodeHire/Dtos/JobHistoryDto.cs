@@ -20,7 +20,11 @@ namespace CodeHire.Dtos
 
         public DateTime StartDate { get; set; }
 
+        public string StartDateString => StartDate.ToShortDateString();
+
         public DateTime EndDate { get; set; }
+
+        public string EndDateString => EndDate.ToShortDateString();
 
         public string Description { get; set; }
     }

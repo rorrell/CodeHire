@@ -190,13 +190,16 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BusinessLogic\FullBusinessLogicImplementor.cs" />
     <Compile Include="BusinessLogic\BasicBusinessLogicImplementor.cs" />
+    <Compile Include="BusinessLogic\JobHistoriesBusinessLogic.cs" />
     <Compile Include="BusinessLogic\JobListingsBusinessLogic.cs" />
     <Compile Include="BusinessLogic\LanguagesBusinessLogic.cs" />
     <Compile Include="BusinessLogic\ResumeBusinessLogic.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Api\JobHistoriesController.cs" />
     <Compile Include="Controllers\Api\JobListingsController.cs" />
     <Compile Include="Controllers\Api\LanguagesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\JobHistoriesController.cs" />
     <Compile Include="Controllers\JobListingsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ResumeController.cs" />
@@ -231,6 +234,10 @@
     <Compile Include="Migrations\202307041922142_AddResumeAndJobHistory.cs" />
     <Compile Include="Migrations\202307041922142_AddResumeAndJobHistory.Designer.cs">
       <DependentUpon>202307041922142_AddResumeAndJobHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202307060154090_AddResumeAndJobHistory1.cs" />
+    <Compile Include="Migrations\202307060154090_AddResumeAndJobHistory1.Designer.cs">
+      <DependentUpon>202307060154090_AddResumeAndJobHistory1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -502,8 +509,6 @@
     <Content Include="Scripts\Dependencies\DataTables\dataTables.semanticui.min.js" />
     <Content Include="Scripts\Dependencies\DataTables\dataTables.uikit.js" />
     <Content Include="Scripts\Dependencies\DataTables\dataTables.uikit.min.js" />
-    <Content Include="Scripts\Dependencies\DataTables\jquery.dataTables.js" />
-    <Content Include="Scripts\Dependencies\DataTables\jquery.dataTables.min.js" />
     <Content Include="Scripts\Dependencies\DataTables\responsive.bootstrap.js" />
     <Content Include="Scripts\Dependencies\DataTables\responsive.bootstrap.min.js" />
     <Content Include="Scripts\Dependencies\DataTables\responsive.bootstrap4.js" />
@@ -524,6 +529,8 @@
     <Content Include="Scripts\Dependencies\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\Dependencies\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\Dependencies\modernizr-2.8.3.js" />
+    <Content Include="Scripts\Dependencies\DataTables\jquery.dataTables.js" />
+    <Content Include="Scripts\Dependencies\DataTables\jquery.dataTables.min.js" />
     <Content Include="Scripts\Pages\AppliedUserJobs.js" />
     <Content Include="Scripts\Pages\AppliedUsers.js" />
     <Content Include="Scripts\Pages\ResumeForm.js" />
@@ -580,6 +587,7 @@
     <Content Include="Views\JobListings\AppliedUserJobs.cshtml" />
     <Content Include="Views\Resume\Details.cshtml" />
     <Content Include="Views\Resume\ResumeForm.cshtml" />
+    <Content Include="Views\JobHistories\JobHistoryForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -607,6 +615,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202307041922142_AddResumeAndJobHistory.resx">
       <DependentUpon>202307041922142_AddResumeAndJobHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202307060154090_AddResumeAndJobHistory1.resx">
+      <DependentUpon>202307060154090_AddResumeAndJobHistory1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -15,12 +15,18 @@ namespace CodeHire.BusinessLogic
 
         public ResumeDto GetByUser(string userId)
         {
-            var user = _context.Users.Where(u => u.Id == userId).Include(u => u.Resume).FirstOrDefault();
+            var resume = _context.Resumes.Include(r => r.WorkHistory)
+                .Include(r => r.User)
+                .SingleOrDefault(r => r.User.Id == userId);
             
-            if(user != null)
-                return Mapper.Map<Resume, ResumeDto>(user.Resume);
+            return Mapper.Map<Resume, ResumeDto>(resume);
+        }
 
-            return null;
+        public ResumeDto GetById(int id)
+        {
+            var resume = _context.Resumes.SingleOrDefault(r => r.Id == id);
+
+            return Mapper.Map<Resume, ResumeDto>(resume);
         }
 
         public ResumeDto Create(ResumeDto resumeDto, string userId)
