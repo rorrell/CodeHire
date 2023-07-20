@@ -10,7 +10,8 @@ namespace CodeHire.Models
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
-        public List<JobListing> JobListings { get; } = new();
+        //public List<JobListing> JobListings { get; } = new();
+        public List<JobListingApplicationUser> JobListingApplicationUsers { get; } = new();
 
         public Resume? Resume { get; set; }
 
@@ -32,6 +33,8 @@ namespace CodeHire.Models
 
         public DbSet<JobHistory> JobHistories { get; set; }
 
+        public DbSet<JobListingApplicationUser> JobListingApplicationUsers { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
@@ -40,6 +43,15 @@ namespace CodeHire.Models
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<JobListing>().HasMany(x => x.JobListingApplicationUsers).WithRequired(x => x.JobListing).HasForeignKey(x => x.JobListing_Id);
+            modelBuilder.Entity<ApplicationUser>().HasMany(x => x.JobListingApplicationUsers).WithRequired(x => x.ApplicationUser).HasForeignKey(x => x.ApplicationUser_Id);
+            modelBuilder.Entity<JobListingApplicationUser>().HasKey(x => new { x.ApplicationUser_Id, x.JobListing_Id });
         }
     }
 }

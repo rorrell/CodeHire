@@ -31,6 +31,7 @@ namespace CodeHire.Models
 
         public List<Language> Languages { get; } = new();
 
-        public List<ApplicationUser> ApplicationUsers { get; } = new();
+        //public List<ApplicationUser> ApplicationUsers { get; } = new();
+        public List<JobListingApplicationUser> JobListingApplicationUsers { get; } = new();
     }
 }

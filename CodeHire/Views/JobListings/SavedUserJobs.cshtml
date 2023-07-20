@@ -1,12 +1,12 @@
 ﻿@{
     ViewBag.Title = "AppliedJobs";
 }
-<br/>
+<br />
 <ul class="nav nav-tabs">
-    <li role="presentation" class="active">@Html.ActionLink("Applied Jobs", "AppliedUserJobs", "JobListings")</li>
-    <li role="presentation">@Html.ActionLink("Saved Jobs", "SavedUserJobs", "JobListings")</li>
+    <li role="presentation">@Html.ActionLink("Applied Jobs", "AppliedUserJobs", "JobListings")</li>
+    <li role="presentation" class="active">@Html.ActionLink("Saved Jobs", "SavedUserJobs", "JobListings")</li>
 </ul>
-<br/>
+<br />
 <table id="jobListings" class="table table-bordered table-hover">
     <thead>
         <tr>
@@ -14,6 +14,8 @@
             <th>Company</th>
             <th>Location</th>
             <th>Languages</th>
+            <th>Apply</th>
+            <th>Delete</th>
         </tr>
     </thead>
     <tbody>
@@ -22,6 +24,6 @@
 
 @section scripts
 {
-    @Scripts.Render("~/scripts/pages/applieduserjobs.js")
+    @Scripts.Render("~/scripts/pages/saveduserjobs.js")
 }
 

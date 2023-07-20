@@ -61,7 +61,7 @@ namespace CodeHire.BusinessLogic
         {
             var jobListingInDb = _context.JobListings
                 .Include(j => j.Languages)
-                .Include(j => j.ApplicationUsers)
+                .Include(j => j.JobListingApplicationUsers)
                 .SingleOrDefault(j => j.Id == id);
 
             if (jobListingInDb == null)
@@ -95,11 +95,11 @@ namespace CodeHire.BusinessLogic
             return true;
         }
 
-        public bool ApplyForJob(int jobId, string userId)
+        public bool ApplyOrSaveJob(int jobId, string userId, JobListingType type = JobListingType.Applied)
         {
             var jobListingInDb = _context.JobListings.
                 Include(j => j.Languages).
-                Include(j => j.ApplicationUsers).
+                Include(j => j.JobListingApplicationUsers).
                 SingleOrDefault(j => j.Id == jobId);
 
             if (jobListingInDb == null)
@@ -110,34 +110,72 @@ namespace CodeHire.BusinessLogic
             if (userInDb == null)
                 return false;
 
-            jobListingInDb.ApplicationUsers.Add(userInDb);
+            jobListingInDb.JobListingApplicationUsers.Add(new JobListingApplicationUser
+            {
+                ApplicationUser = userInDb,
+                JobListing = jobListingInDb,
+                Type = type
+            });
 
             _context.SaveChanges();
 
             return true;
         }
 
-        public IEnumerable<JobListingDto> GetAppliedJobs(string userId)
+        public bool ApplyToSaved(int jobId, string userId)
+        {
+            var jobListingApplicationUserInDb = _context.JobListingApplicationUsers
+                .SingleOrDefault(j => j.JobListing_Id == jobId && j.ApplicationUser_Id == userId);
+
+            if (jobListingApplicationUserInDb == null)
+                return false;
+
+            jobListingApplicationUserInDb.Type = JobListingType.Applied;
+
+            _context.SaveChanges();
+
+            return true;
+        }
+
+        public IEnumerable<JobListingDto> GetAppliedOrSavedJobs(string userId, JobListingType type = JobListingType.Applied)
         {
             var userInDb = _context.Users
-                .Include(u => u.JobListings.Select(j => j.Languages))
+                .Include(u => u.JobListingApplicationUsers.Select(j => j.JobListing.Languages))
                 .SingleOrDefault(u => u.Id == userId);
 
             if (userInDb == null)
                 return null;
 
-            return userInDb.JobListings.ToList()
+            return userInDb.JobListingApplicationUsers
+                .Where(j => j.Type == type)
+                .Select(j => j.JobListing)
+                .ToList()
                 .Select(Mapper.Map<JobListing, JobListingDto>);
         }
 
         public IEnumerable<UserDto> GetUserApplicationsForJob(int jobId)
         {
             var jobListing = _context.JobListings
-                .Include(j => j.ApplicationUsers)
+                .Include(j => j.JobListingApplicationUsers.Select(j => j.ApplicationUser))
                 .First(j => j.Id == jobId);
 
-            return jobListing.ApplicationUsers
-                .Select(Mapper.Map<ApplicationUser, UserDto>);
+            return jobListing.JobListingApplicationUsers
+                .Select(j => Mapper.Map<ApplicationUser, UserDto>(j.ApplicationUser));
+        }
+
+        public bool DeleteSavedJob(int jobListingId, string userId)
+        {
+            var jobListingApplicationUserInDb = _context.JobListingApplicationUsers
+                .SingleOrDefault(j => j.JobListing_Id == jobListingId && j.ApplicationUser_Id == userId);
+
+            if (jobListingApplicationUserInDb == null)
+                return false;
+
+            _context.JobListingApplicationUsers.Remove(jobListingApplicationUserInDb);
+            _context.SaveChanges();
+
+            return true;
+
         }
     }
 }

@@ -239,11 +239,16 @@
     <Compile Include="Migrations\202307060154090_AddResumeAndJobHistory1.Designer.cs">
       <DependentUpon>202307060154090_AddResumeAndJobHistory1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202307200136026_Add-Type-To-JobListingsApplicationUsers.cs" />
+    <Compile Include="Migrations\202307200136026_Add-Type-To-JobListingsApplicationUsers.Designer.cs">
+      <DependentUpon>202307200136026_Add-Type-To-JobListingsApplicationUsers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\JobHistory.cs" />
     <Compile Include="Models\JobListing.cs" />
+    <Compile Include="Models\JobListingApplicationUsers.cs" />
     <Compile Include="Models\Language.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Resume.cs" />
@@ -531,6 +536,7 @@
     <Content Include="Scripts\Dependencies\modernizr-2.8.3.js" />
     <Content Include="Scripts\Dependencies\DataTables\jquery.dataTables.js" />
     <Content Include="Scripts\Dependencies\DataTables\jquery.dataTables.min.js" />
+    <Content Include="Scripts\Pages\SavedUserJobs.js" />
     <Content Include="Scripts\Pages\AppliedUserJobs.js" />
     <Content Include="Scripts\Pages\AppliedUsers.js" />
     <Content Include="Scripts\Pages\ResumeForm.js" />
@@ -588,6 +594,7 @@
     <Content Include="Views\Resume\Details.cshtml" />
     <Content Include="Views\Resume\ResumeForm.cshtml" />
     <Content Include="Views\JobHistories\JobHistoryForm.cshtml" />
+    <Content Include="Views\JobListings\SavedUserJobs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -618,6 +625,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202307060154090_AddResumeAndJobHistory1.resx">
       <DependentUpon>202307060154090_AddResumeAndJobHistory1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202307200136026_Add-Type-To-JobListingsApplicationUsers.resx">
+      <DependentUpon>202307200136026_Add-Type-To-JobListingsApplicationUsers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

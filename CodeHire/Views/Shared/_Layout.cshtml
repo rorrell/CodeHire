@@ -24,7 +24,7 @@
                 <ul class="nav navbar-nav">
                     @if (User.Identity.IsAuthenticated && !User.IsInRole(RoleName.CanManageJobs))
                     {
-                        <li>@Html.ActionLink("Applied Jobs", "AppliedUserJobs", "JobListings")</li>
+                        <li>@Html.ActionLink("My Jobs", "AppliedUserJobs", "JobListings")</li>
                         <li>@Html.ActionLink("Edit Resume", "ResumeForm", "Resume")</li>
                     }
                 </ul>

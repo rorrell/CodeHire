@@ -57,7 +57,26 @@ namespace CodeHire.Controllers.Api
         public IHttpActionResult GetAppliedUserJobs()
         {
             if(User.Identity.IsAuthenticated)
-                return Ok(bll.GetAppliedJobs(User.Identity.GetUserId()));
+                return Ok(bll.GetAppliedOrSavedJobs(User.Identity.GetUserId()));
+
+            return Unauthorized();
+        }
+
+        [Route("api/savedjobs")]
+        public IHttpActionResult GetSavedUserJobs()
+        {
+            if (User.Identity.IsAuthenticated)
+                return Ok(bll.GetAppliedOrSavedJobs(User.Identity.GetUserId(), JobListingType.Saved));
+
+            return Unauthorized();
+        }
+
+        [Route("api/savedjobs/{id}")]
+        [HttpDelete]
+        public IHttpActionResult DeleteSavedUserJobs(int id)
+        {
+            if (User.Identity.IsAuthenticated)
+                return Ok(bll.DeleteSavedJob(id, User.Identity.GetUserId()));
 
             return Unauthorized();
         }

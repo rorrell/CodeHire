@@ -127,7 +127,7 @@ namespace CodeHire.Controllers
         [Authorize]
         public ActionResult Apply(int id)
         {
-            var result = bll.ApplyForJob(id, User.Identity.GetUserId());
+            var result = bll.ApplyOrSaveJob(id, User.Identity.GetUserId());
 
             if (!result)
                 return HttpNotFound();
@@ -136,7 +136,35 @@ namespace CodeHire.Controllers
         }
 
         [Authorize]
+        public ActionResult ApplyToSaved(int id)
+        {
+            var result = bll.ApplyToSaved(id, User.Identity.GetUserId());
+
+            if (!result)
+                return HttpNotFound();
+
+            return RedirectToAction("AppliedUserJobs");
+        }
+
+        [Authorize]
+        public ActionResult Save(int id)
+        {
+            var result = bll.ApplyOrSaveJob(id, User.Identity.GetUserId(), JobListingType.Saved);
+
+            if (!result)
+                return HttpNotFound();
+
+            return RedirectToAction("SavedUserJobs");
+        }
+
+        [Authorize]
         public ViewResult AppliedUserJobs()
+        {
+            return View();
+        }
+
+        [Authorize]
+        public ViewResult SavedUserJobs()
         {
             return View();
         }
