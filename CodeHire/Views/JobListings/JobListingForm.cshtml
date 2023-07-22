@@ -44,6 +44,8 @@
     @Html.Hidden("JobListing.Id", Model.JobListing?.Id ?? 0)
     @Html.AntiForgeryToken()
     <button type="submit" class="btn btn-primary">Save</button>
+    @Html.ActionLink("Cancel", "Cancel", "JobListings", null, new { @class = "btn btn-primary" })
+
 }
 
 @section scripts

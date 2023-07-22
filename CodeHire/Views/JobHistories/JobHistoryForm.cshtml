@@ -42,6 +42,7 @@
     @Html.Hidden("Id", Model?.Id ?? 0)
     @Html.AntiForgeryToken()
     <button type="submit" class="btn btn-primary">Save</button>
+    @Html.ActionLink("Cancel", "Cancel", "JobHistories", null, new { @class = "btn btn-primary" })
 }
 
 @section scripts

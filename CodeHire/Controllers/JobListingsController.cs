@@ -175,5 +175,10 @@ namespace CodeHire.Controllers
             var job = bll.GetOne(id);
             return View(job);
         }
+
+        public ViewResult Cancel()
+        {
+            return View("Index");
+        }
     }
 }

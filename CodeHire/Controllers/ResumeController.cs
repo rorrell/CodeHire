@@ -64,5 +64,10 @@ namespace CodeHire.Controllers
 
             return RedirectToAction("Index", "JobListings");
         }
+
+        public RedirectToRouteResult Cancel()
+        {
+            return RedirectToAction("Index", "JobListings");
+        }
     }
 }
