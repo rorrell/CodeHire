@@ -194,20 +194,28 @@
     <Compile Include="BusinessLogic\JobListingsBusinessLogic.cs" />
     <Compile Include="BusinessLogic\LanguagesBusinessLogic.cs" />
     <Compile Include="BusinessLogic\ResumeBusinessLogic.cs" />
+    <Compile Include="BusinessLogic\SkillsBusinessLogic.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\JobHistoriesController.cs" />
     <Compile Include="Controllers\Api\JobListingsController.cs" />
     <Compile Include="Controllers\Api\LanguagesController.cs" />
+    <Compile Include="Controllers\Api\ResumeController.cs" />
+    <Compile Include="Controllers\Api\SkillsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JobHistoriesController.cs" />
     <Compile Include="Controllers\JobListingsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ResumeController.cs" />
+    <Compile Include="Controllers\SkillsController.cs" />
     <Compile Include="Dtos\JobHistoryDto.cs" />
     <Compile Include="Dtos\JobListingDto.cs" />
     <Compile Include="Dtos\LanguageDto.cs" />
     <Compile Include="Dtos\ResumeDto.cs" />
+    <Compile Include="Dtos\ResumeSkillsDto.cs" />
+    <Compile Include="Dtos\ResumeWithoutUserDto.cs" />
+    <Compile Include="Dtos\SkillDto.cs" />
     <Compile Include="Dtos\UserDto.cs" />
+    <Compile Include="Dtos\UserDto2.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -243,6 +251,10 @@
     <Compile Include="Migrations\202307200136026_Add-Type-To-JobListingsApplicationUsers.Designer.cs">
       <DependentUpon>202307200136026_Add-Type-To-JobListingsApplicationUsers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202307222344563_Add-Skills.cs" />
+    <Compile Include="Migrations\202307222344563_Add-Skills.Designer.cs">
+      <DependentUpon>202307222344563_Add-Skills.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -253,6 +265,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Resume.cs" />
     <Compile Include="Models\RoleName.cs" />
+    <Compile Include="Models\Skill.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\JobListingFormViewModel.cs" />
@@ -549,6 +562,7 @@
     <Content Include="Scripts\Dependencies\typeahead.bundle.min.js" />
     <Content Include="Scripts\Dependencies\typeahead.jquery.js" />
     <Content Include="Scripts\Dependencies\typeahead.jquery.min.js" />
+    <Content Include="Scripts\Pages\Skills.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -595,6 +609,7 @@
     <Content Include="Views\Resume\ResumeForm.cshtml" />
     <Content Include="Views\JobHistories\JobHistoryForm.cshtml" />
     <Content Include="Views\JobListings\SavedUserJobs.cshtml" />
+    <Content Include="Views\Skills\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -628,6 +643,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202307200136026_Add-Type-To-JobListingsApplicationUsers.resx">
       <DependentUpon>202307200136026_Add-Type-To-JobListingsApplicationUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202307222344563_Add-Skills.resx">
+      <DependentUpon>202307222344563_Add-Skills.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

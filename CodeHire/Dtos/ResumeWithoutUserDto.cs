@@ -4,19 +4,17 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace CodeHire.Models
+namespace CodeHire.Dtos
 {
-    public class Resume
+    public class ResumeWithoutUserDto
     {
         public int Id { get; set; }
 
         [Required]
-        public ApplicationUser User { get; set; } = null!;
-
         public string Summary { get; set; }
 
-        public List<JobHistory> WorkHistory { get; } = new();
+        public List<JobHistoryDto> WorkHistory { get; } = new();
 
-        public List<Skill> Skills { get; } = new();
+        public List<SkillDto> Skills { get; } = new();
     }
 }

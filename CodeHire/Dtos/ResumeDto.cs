@@ -17,5 +17,7 @@ namespace CodeHire.Dtos
         public string Summary { get; set; }
 
         public List<JobHistoryDto> WorkHistory { get; } = new();
+
+        public List<SkillDto> Skills { get; } = new();
     }
 }

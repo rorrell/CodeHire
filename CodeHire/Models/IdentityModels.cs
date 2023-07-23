@@ -35,6 +35,8 @@ namespace CodeHire.Models
 
         public DbSet<JobListingApplicationUser> JobListingApplicationUsers { get; set; }
 
+        public DbSet<Skill> Skills { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

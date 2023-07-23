@@ -153,14 +153,17 @@ namespace CodeHire.BusinessLogic
                 .Select(Mapper.Map<JobListing, JobListingDto>);
         }
 
-        public IEnumerable<UserDto> GetUserApplicationsForJob(int jobId)
+        public IEnumerable<UserDto2> GetUserApplicationsForJob(int jobId)
         {
             var jobListing = _context.JobListings
-                .Include(j => j.JobListingApplicationUsers.Select(j => j.ApplicationUser))
+                .Include(j => j.JobListingApplicationUsers
+                .Select(j => j.ApplicationUser)
+                .Select(a => a.Resume)
+                .Select(r => r.Skills))
                 .First(j => j.Id == jobId);
 
             return jobListing.JobListingApplicationUsers
-                .Select(j => Mapper.Map<ApplicationUser, UserDto>(j.ApplicationUser));
+                .Select(j => Mapper.Map<ApplicationUser, UserDto2>(j.ApplicationUser));
         }
 
         public bool DeleteSavedJob(int jobListingId, string userId)

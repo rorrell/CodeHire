@@ -1,0 +1,36 @@
+﻿@model CodeHire.Dtos.ResumeDto
+@{
+    ViewBag.Title = "Add Skills Form";
+}
+
+<h1>Add Skills</h1>
+<form id="addSkills">
+    <div class="form-group">
+        <label>Skill</label>
+        <div class="tt-container">
+            <input id="skill" name="skill" type="text" value="" class="form-control" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 col-sm-4">
+            <ul id="skills" class="list-group"></ul>
+        </div>
+    </div>
+    @Html.HiddenFor(model => model.Id)
+    <button class="btn btn-primary">Submit</button>
+</form>
+
+<h3>Existing Skills</h3>
+<ul>
+    @foreach (var skill in Model.Skills)
+    {
+        <li>@skill.Name</li>
+    }
+</ul>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/scripts/pages/skills.js")
+}

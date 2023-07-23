@@ -12,6 +12,9 @@
     <div class="panel-body">
         @Model.Summary
     </div>
+    <div class="panel-body">
+        @string.Join(", ", Model.Skills.Select(l => l.Name))
+    </div>
     <table class="table">
         <thead>
         <th>Job Title</th>

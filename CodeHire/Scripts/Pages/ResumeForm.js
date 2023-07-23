@@ -48,4 +48,35 @@
             });
         });
 
+    var table2 = $("#skills").DataTable({
+        ajax: {
+            url: "/api/resume/skills/" + $('#resumeId').val(),
+            dataSrc: ""
+        },
+        columns: [
+            {
+                data: "name"
+            },
+            {
+                data: "id",
+                render: function (data) {
+                    return "<button data-skill-id=" + data + " class='btn-link js-delete'>Delete</button>";
+                }
+            }
+        ]
+    });
+
+    $("#skills").on("click",
+        ".js-delete",
+        function () {
+            var button = $(this);
+            $.ajax({
+                url: "/api/resume/skills/" + button.attr("data-skill-id") + "/" + $('#resumeId').val(),
+                method: "DELETE",
+                success: function () {
+                    table2.row(button.parents("tr")).remove().draw();
+                }
+            });
+        });
+
 });

@@ -68,6 +68,7 @@ namespace CodeHire.Controllers
             return RedirectToAction("ResumeForm", "Resume", resume);
         }
 
+        [Authorize]
         public RedirectToRouteResult Cancel()
         {
             var resume = rbll.GetByUser(User.Identity.GetUserId());
