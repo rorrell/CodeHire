@@ -26,13 +26,17 @@
         <tbody>
             @foreach (var job in @Model.WorkHistory)
             {
-                <td>@job.JobTitle</td>
-                <td>@job.Company</td>
-                <td>@job.Location</td>
-                <td>@job.StartDateString - @job.EndDateString</td>
-                <td>@job.Description</td>
-            }
-        </tbody>
-    </table>
-</div>
+            <td>@job.JobTitle</td>
+            <td>@job.Company</td>
+            <td>@job.Location</td>
+            <td>@job.StartDateString - @job.EndDateString</td>
+            <td>@job.Description</td>
+        }
+            </tbody>
+        </table>
+    </div>
+    @if (Request.UrlReferrer != null)
+    {
+        <a class="btn btn-primary" onclick="history.go(-1); return false;" href="#">Back</a>
+    }
 
