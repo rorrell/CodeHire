@@ -58,6 +58,7 @@ namespace CodeHire.BusinessLogic
 
             Mapper.Map(resumeDto, resumeInDb);
 
+            resumeInDb.Skills.Clear();
             resumeInDb.Skills.AddRange(resumeSkills);
             if (selectedSkillIds != null)
             {
